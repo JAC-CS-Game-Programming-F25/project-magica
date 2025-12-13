@@ -2,40 +2,41 @@ extends CharacterBody3D
 
 class_name Weyland
 
-@onready var _animation_player: AnimationPlayer = $AnimationPlayer
-@onready var _nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var _sprite: AnimatedSprite3D = $AnimatedSprite3D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+@onready var _state_machine: StateMachine = $StateMachine
 
 @export var movement_speed: float = 2.0
 
 func _ready() -> void:
-	_nav_agent.path_desired_distance = 0.5
-	_nav_agent.target_desired_distance = 0.5
+	nav_agent.path_desired_distance = 0.5
+	nav_agent.target_desired_distance = 0.5
 	actor_setup.call_deferred()
+	
+	set_shader_params()
 
-func _process(delta: float) -> void:
-	pass
-
-func  _physics_process(delta: float) -> void:
-	if reached_target():
-		_animation_player.play("Idle")
-		return
-	var next_position: Vector3 = _nav_agent.get_next_path_position()
-	print(velocity)
-	if position.x < next_position.x:
-		_sprite.flip_h = false
-	else:
-		_sprite.flip_h	= true
-		
-	_animation_player.play("Walk") 
-	global_position = global_position.move_toward(next_position, delta * movement_speed)
+func change_state(new_state: String):
+	_state_machine.change_state(_state_machine.current_state, new_state)
 
 func actor_setup() -> void:
 	await get_tree().physics_frame
 
-func set_movement_target(movementTarget: Vector3) -> void:
-	_nav_agent.set_target_position(movementTarget)
+func set_movement_target(movement_target: Vector3) -> void:
+	var current_state: PlayerState = _state_machine.current_state
+	if !(current_state is PlayerIdleState or current_state is PlayerWalkingState):
+		return
+	
+	_state_machine.current_state.Transitioned.emit(_state_machine.current_state, "walking", movement_target)
 
-func reached_target() -> bool:
-	return abs(self.position.x - _nav_agent.target_position.x) < 0.1 and \
-		abs(self.position.z - _nav_agent.target_position.z) < 0.1 
+func set_shader_params() -> void:
+	var base_tex_path: String = "shader_parameter/base_texture"
+	var current_frame: Texture2D = sprite.sprite_frames.get_frame_texture(
+		sprite.animation, 
+		sprite.frame
+	)
+	sprite.material_overlay.set(base_tex_path, current_frame)
+
+
+func _on_animated_sprite_3d_frame_changed() -> void:
+	set_shader_params()
