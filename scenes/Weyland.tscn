@@ -1,12 +1,12 @@
 [gd_scene load_steps=37 format=3 uid="uid://bodyyroed4bv"]
 
-[ext_resource type="Script" uid="uid://cllskjabxvpch" path="res://scripts/entities/weyland.gd" id="1_vkkpn"]
-[ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_g8xg8"]
-[ext_resource type="Texture2D" uid="uid://d2fskudvatnkc" path="res://assets/sprites/WeylandSpriteSheet.png" id="2_vkkpn"]
-[ext_resource type="Script" uid="uid://d4lh8hbuym64c" path="res://scripts/states/state_machine.gd" id="3_h6cwe"]
-[ext_resource type="Script" uid="uid://xr4quiqofuua" path="res://scripts/states/player/player_flinch.gd" id="4_g8xg8"]
-[ext_resource type="Script" uid="uid://bs8ne5sl4j1xr" path="res://scripts/states/player/player_idle.gd" id="5_0v5h1"]
-[ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="6_e1hy1"]
+[ext_resource type="Script" uid="uid://cllskjabxvpch" path="res://scripts/entities/weyland.gd" id="1_6v8rv"]
+[ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_tssgf"]
+[ext_resource type="Texture2D" uid="uid://d2fskudvatnkc" path="res://assets/sprites/WeylandSpriteSheet.png" id="3_nqjw1"]
+[ext_resource type="Script" uid="uid://d4lh8hbuym64c" path="res://scripts/states/state_machine.gd" id="4_a62f8"]
+[ext_resource type="Script" uid="uid://xr4quiqofuua" path="res://scripts/states/player/player_flinch.gd" id="5_uv07r"]
+[ext_resource type="Script" uid="uid://bs8ne5sl4j1xr" path="res://scripts/states/player/player_idle.gd" id="6_orkr5"]
+[ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="7_q7dvr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnktw"]
 transparency = 1
@@ -210,78 +210,78 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5h1"]
 render_priority = 0
-shader = ExtResource("2_g8xg8")
+shader = ExtResource("2_tssgf")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkkpn"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(0, 4000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f334i"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(0, 2000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olmmg"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(1000, 2000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_in7yo"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(2000, 2000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6cwe"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(3000, 2000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g8xg8"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(0, 0, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0v5h1"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(1000, 0, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1hy1"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(2000, 0, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lneqj"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(3000, 0, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dq2sg"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(4000, 2000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8pat"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(5000, 2000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ri51c"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(0, 3000, 2000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hehec"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(2000, 3000, 2000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pv4o5"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(4000, 3000, 2000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rwn2"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(0, 1000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ny0dd"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(1000, 1000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m331i"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(2000, 1000, 1000, 1000)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nwaun"]
-atlas = ExtResource("2_vkkpn")
+atlas = ExtResource("3_nqjw1")
 region = Rect2(3000, 1000, 1000, 1000)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0v5h1"]
@@ -367,7 +367,7 @@ animations = [{
 }]
 
 [node name="Weyland" type="CharacterBody3D"]
-script = ExtResource("1_vkkpn")
+script = ExtResource("1_6v8rv")
 movement_speed = null
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
@@ -395,21 +395,21 @@ sprite_frames = SubResource("SpriteFrames_0v5h1")
 animation = &"Parry"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_h6cwe")
+script = ExtResource("4_a62f8")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://d4lh8hbuym64c"
 
 [node name="Flinch" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("4_g8xg8")
+script = ExtResource("5_uv07r")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://xr4quiqofuua"
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("5_0v5h1")
+script = ExtResource("6_orkr5")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://bs8ne5sl4j1xr"
 
 [node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("6_e1hy1")
+script = ExtResource("7_q7dvr")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://byldbh7p2q05k"

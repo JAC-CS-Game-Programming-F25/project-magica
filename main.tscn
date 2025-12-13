@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk5l6pbairtq7"]
+
+[ext_resource type="Script" uid="uid://d4lh8hbuym64c" path="res://scripts/states/state_machine.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://ckik54io5r1eg" path="res://scripts/states/game/main_menu_state.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://buso3b76yndap" path="res://scripts/states/game/play_state.gd" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://drdyyvmdadnif" path="res://game.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://damei2pr1oq6r" path="res://scenes/main_menu.tscn" id="5_lquwl"]
+
+[node name="Main" type="Node" node_paths=PackedStringArray("initial_state") groups=["GameState"]]
+script = ExtResource("1_ig7tw")
+initial_state = NodePath("MainMenu")
+metadata/_custom_type_script = "uid://d4lh8hbuym64c"
+
+[node name="Play" type="Node" parent="." node_paths=PackedStringArray("scene")]
+script = ExtResource("3_lquwl")
+scene = NodePath("Game")
+metadata/_custom_type_script = "uid://buso3b76yndap"
+
+[node name="Game" parent="Play" instance=ExtResource("4_7mycd")]
+
+[node name="MainMenu" type="Node" parent="." node_paths=PackedStringArray("scene")]
+script = ExtResource("2_1bvp3")
+scene = NodePath("MainMenuScreen")
+metadata/_custom_type_script = "uid://ckik54io5r1eg"
+
+[node name="MainMenuScreen" parent="MainMenu" instance=ExtResource("5_lquwl")]
