@@ -1,0 +1,169 @@
+[gd_scene load_steps=22 format=3 uid="uid://bodyyroed4bv"]
+
+[ext_resource type="Texture2D" uid="uid://c3cqnvmnd2tpn" path="res://assets/sprites/WeylandSpriteSheet.png" id="1_dnktw"]
+[ext_resource type="Script" uid="uid://cllskjabxvpch" path="res://scripts/Entities/weyland.gd" id="1_vkkpn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whoq7"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(0, 2000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkkpn"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(1000, 2000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f334i"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(2000, 2000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olmmg"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(3000, 2000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo0ht"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(0, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk52j"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ixpm"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(2000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw7kq"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(3000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in7yo"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(4000, 2000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6cwe"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(5000, 2000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8xg8"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(0, 3000, 2000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v5h1"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(2000, 3000, 2000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1hy1"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(4000, 3000, 2000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lneqj"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(0, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rwn2"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(1000, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny0dd"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(2000, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m331i"]
+atlas = ExtResource("1_dnktw")
+region = Rect2(3000, 1000, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x707a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whoq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkkpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f334i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olmmg")
+}],
+"loop": true,
+"name": &"Guard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo0ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk52j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ixpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw7kq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in7yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6cwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8xg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v5h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1hy1")
+}],
+"loop": true,
+"name": &"Parry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lneqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rwn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny0dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m331i")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnktw"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(0.58, 0.58, 0.58, 0.160784)
+
+[node name="Weyland" type="CharacterBody3D"]
+script = ExtResource("1_vkkpn")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.02, 0.735, 0.15)
+sprite_frames = SubResource("SpriteFrames_x707a")
+animation = &"Guard"
+frame_progress = 0.113741
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+radius = 0.25
+height = 0.001
+sides = 16
+material = SubResource("StandardMaterial3D_dnktw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
