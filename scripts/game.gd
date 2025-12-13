@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var camera: Camera3D = $Camera3D
 @onready var weyland: Weyland = $Weyland
+@onready var pause_menu: PauseMenu = $"CanvasLayer/PauseMenu"
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_clicked(event):
@@ -21,3 +22,11 @@ func _mouse_clicked(event: InputEvent) -> bool:
 		event.button_index == MOUSE_BUTTON_LEFT and \
 		event.pressed
 	 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if _should_pause(event):
+		pause_menu.pause() 
+
+func _should_pause(event: InputEvent) -> bool:
+	return event is InputEvent \
+		and event.is_pressed() \
+		and event.as_text() == 'Escape'
