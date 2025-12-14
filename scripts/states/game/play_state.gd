@@ -3,14 +3,17 @@ extends GameState
 class_name GamePlayState
 
 func _ready() -> void:
+	(scene as Game).canvas_layer.hide()
 	show_scene(false)
 
 func enter(args = null) -> void:
 	(scene as Game).weyland.game_status.emit(true)
+	(scene as Game).canvas_layer.show()
 	show_scene(true)
 
 func exit() -> void:
 	(scene as Game).weyland.game_status.emit(false)
+	(scene as Game).canvas_layer.hide()
 	show_scene(false)
 
 func process(_delta: float) -> void:

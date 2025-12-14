@@ -32,6 +32,7 @@ func _ready() -> void:
 	internal_damage = max_health
 	
 	_health_bar.hide()
+	_health_bar.health.color = Color(0.60, 0.43, 0.63)
 	
 	game_status.connect(_on_game_status_change)
 

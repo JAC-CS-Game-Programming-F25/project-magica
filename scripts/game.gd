@@ -5,6 +5,7 @@ class_name Game
 @onready var camera: Camera3D = $Camera3D
 @onready var weyland: Weyland = $Weyland
 @onready var pause_menu: PauseMenu = $"CanvasLayer/PauseMenu"
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_clicked(event):

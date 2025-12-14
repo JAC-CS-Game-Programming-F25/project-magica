@@ -421,8 +421,8 @@ player = NodePath("../..")
 metadata/_custom_type_script = "uid://dkynreasuvr0x"
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_tssgf")]
-offset_left = 26.0
-offset_top = 23.0
-offset_right = -1474.0
-offset_bottom = -837.0
+offset_left = 256.0
+offset_top = 64.0
+offset_right = -1244.0
+offset_bottom = -816.0
 player = NodePath("..")
