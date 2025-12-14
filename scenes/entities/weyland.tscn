@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bs8ne5sl4j1xr" path="res://scripts/states/player/player_idle.gd" id="6_7k4hb"]
 [ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="7_7xf68"]
 [ext_resource type="Script" uid="uid://dkynreasuvr0x" path="res://scripts/states/player/player_skill_state.gd" id="8_b4iq3"]
-[ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/health_bar.tscn" id="9_waqog"]
+[ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/ui/health_bar.tscn" id="9_waqog"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnktw"]
 transparency = 1

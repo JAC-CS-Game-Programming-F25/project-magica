@@ -2,7 +2,7 @@ extends Control
 
 class_name HealthBar
 
-@export var player: Weyland
+@export var player: Player
 
 @onready var health: ColorRect = $Health
 

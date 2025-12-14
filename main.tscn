@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://d4lh8hbuym64c" path="res://scripts/states/state_machine.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://ckik54io5r1eg" path="res://scripts/states/game/main_menu_state.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://buso3b76yndap" path="res://scripts/states/game/play_state.gd" id="3_lquwl"]
-[ext_resource type="PackedScene" uid="uid://drdyyvmdadnif" path="res://game.tscn" id="4_7mycd"]
-[ext_resource type="PackedScene" uid="uid://damei2pr1oq6r" path="res://scenes/main_menu.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://drdyyvmdadnif" path="res://scenes/game.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://damei2pr1oq6r" path="res://scenes/ui/main_menu.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("initial_state") groups=["GameState"]]
 script = ExtResource("1_ig7tw")

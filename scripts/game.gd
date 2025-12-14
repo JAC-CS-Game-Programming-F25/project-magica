@@ -4,6 +4,8 @@ class_name Game
 
 @onready var camera: Camera3D = $Camera3D
 @onready var weyland: Weyland = $Weyland
+@onready var sal: Sal = $Sal
+@onready var er: Er = $Er
 @onready var pause_menu: PauseMenu = $"CanvasLayer/PauseMenu"
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
@@ -18,7 +20,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_world_3d().navigation_map,
 			camera_ray_start,
 			camera_ray_end)
-		weyland.set_movement_target(closest_point_on_navmesh)
+			
+		if _should_player_move(event, "Weyland_Move"):
+			weyland.set_movement_target(closest_point_on_navmesh)
+		if _should_player_move(event, "Sal_Move"):
+			sal.set_movement_target(closest_point_on_navmesh)
+		if _should_player_move(event, "Er_Move"):
+			er.set_movement_target(closest_point_on_navmesh)
+
 
 func _mouse_clicked(event: InputEvent) -> bool:
 	return event is InputEventMouseButton and \
@@ -33,3 +42,7 @@ func _should_pause(event: InputEvent) -> bool:
 	return event is InputEvent \
 		and event.is_pressed() \
 		and event.as_text() == 'Escape'
+		
+func _should_player_move(event: InputEvent, characterKey: String) -> bool:
+	return event is InputEvent \
+		and Input.is_action_pressed(characterKey) 
