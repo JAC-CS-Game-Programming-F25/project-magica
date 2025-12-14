@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://drdyyvmdadnif"]
+[gd_scene load_steps=10 format=3 uid="uid://drdyyvmdadnif"]
 
 [ext_resource type="PackedScene" uid="uid://dy5m6rt0mpadq" path="res://scenes/level.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bwmkjfwdwgvne" path="res://scripts/game.gd" id="1_feb5d"]
-[ext_resource type="PackedScene" uid="uid://bodyyroed4bv" path="res://scenes/weyland.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://bodyyroed4bv" path="res://scenes/entities/weyland.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://bx6dh8iutymnp" path="res://scenes/entities/enemy_wolf.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://b2iacv8xykenm" path="res://scenes/pause_menu.tscn" id="4_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://dbm8issxfxdxy" path="res://assets/UI/HealthBar.png" id="5_7jktm"]
 
@@ -22,6 +23,9 @@ glow_enabled = true
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_feb5d")
+
+[node name="Wolf" parent="." instance=ExtResource("2_ryrav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66928, 0, 0)
 
 [node name="Weyland" parent="." instance=ExtResource("2_e2o6t")]
 

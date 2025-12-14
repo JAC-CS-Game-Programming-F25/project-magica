@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://cjkb3fnfq0k5m"]
+
+[ext_resource type="Script" uid="uid://p752uuv1hk04" path="res://scripts/objects/projectile.gd" id="1_34nii"]
+[ext_resource type="Texture2D" uid="uid://coks7pfbbr2v1" path="res://assets/sprites/RoseSpriteSheet.png" id="2_uu106"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uu106"]
+radius = 0.0796378
+height = 0.675802
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abpih"]
+atlas = ExtResource("2_uu106")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u88p"]
+atlas = ExtResource("2_uu106")
+region = Rect2(500, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1dfh"]
+atlas = ExtResource("2_uu106")
+region = Rect2(1000, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05r65"]
+atlas = ExtResource("2_uu106")
+region = Rect2(1500, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojjxe"]
+atlas = ExtResource("2_uu106")
+region = Rect2(0, 500, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dvvk"]
+atlas = ExtResource("2_uu106")
+region = Rect2(500, 500, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg766"]
+atlas = ExtResource("2_uu106")
+region = Rect2(1000, 500, 500, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_abpih"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_abpih")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_5u88p")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_n1dfh")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_05r65")
+}],
+"loop": true,
+"name": &"Appear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ojjxe")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_0dvvk")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_gg766")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Projectile" type="Area3D" node_paths=PackedStringArray("hitbox", "sprite")]
+script = ExtResource("1_34nii")
+hitbox = NodePath("CollisionShape3D")
+sprite = NodePath("AnimatedSprite3D")
+metadata/_custom_type_script = "uid://p752uuv1hk04"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_uu106")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_abpih")
+animation = &"Idle"
+frame_progress = 0.423844
