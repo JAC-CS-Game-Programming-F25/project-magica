@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Game
+
 @onready var camera: Camera3D = $Camera3D
 @onready var weyland: Weyland = $Weyland
 @onready var pause_menu: PauseMenu = $"CanvasLayer/PauseMenu"

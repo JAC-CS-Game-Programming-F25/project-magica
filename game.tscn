@@ -23,6 +23,7 @@ glow_enabled = true
 script = ExtResource("1_feb5d")
 
 [node name="Weyland" parent="." instance=ExtResource("2_e2o6t")]
+movement_speed = 2.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.831527, -0.55548, -0.00193313, 0.197925, -0.299533, 0.933331, -0.519026, 0.775707, 0.359013, 0, 0, 0)

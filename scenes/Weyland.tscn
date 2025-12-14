@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bodyyroed4bv"]
+[gd_scene load_steps=39 format=3 uid="uid://bodyyroed4bv"]
 
 [ext_resource type="Script" uid="uid://cllskjabxvpch" path="res://scripts/entities/weyland.gd" id="1_6v8rv"]
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_tssgf"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://xr4quiqofuua" path="res://scripts/states/player/player_flinch.gd" id="5_uv07r"]
 [ext_resource type="Script" uid="uid://bs8ne5sl4j1xr" path="res://scripts/states/player/player_idle.gd" id="6_orkr5"]
 [ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="7_q7dvr"]
+[ext_resource type="Script" uid="uid://dkynreasuvr0x" path="res://scripts/states/player/player_skill_state.gd" id="8_nqjw1"]
+[ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/health_bar.tscn" id="8_tssgf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnktw"]
 transparency = 1
@@ -368,7 +370,6 @@ animations = [{
 
 [node name="Weyland" type="CharacterBody3D"]
 script = ExtResource("1_6v8rv")
-movement_speed = null
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -413,3 +414,15 @@ metadata/_custom_type_script = "uid://bs8ne5sl4j1xr"
 script = ExtResource("7_q7dvr")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://byldbh7p2q05k"
+
+[node name="Skill" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_nqjw1")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dkynreasuvr0x"
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("8_tssgf")]
+offset_left = 26.0
+offset_top = 23.0
+offset_right = -1474.0
+offset_bottom = -837.0
+player = NodePath("..")
