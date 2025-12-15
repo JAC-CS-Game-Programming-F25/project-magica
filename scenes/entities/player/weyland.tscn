@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bodyyroed4bv"]
+[gd_scene load_steps=41 format=3 uid="uid://bodyyroed4bv"]
 
 [ext_resource type="Script" uid="uid://cllskjabxvpch" path="res://scripts/entities/players/weyland.gd" id="1_cx0wv"]
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_ev6hy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bs8ne5sl4j1xr" path="res://scripts/states/player/player_idle.gd" id="6_7k4hb"]
 [ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="7_7xf68"]
 [ext_resource type="Script" uid="uid://dkynreasuvr0x" path="res://scripts/states/player/player_skill_state.gd" id="8_b4iq3"]
+[ext_resource type="Script" uid="uid://pgfi3a8j70" path="res://scripts/states/player/player_parry.gd" id="9_bktkn"]
 [ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/ui/health_bar.tscn" id="9_waqog"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnktw"]
@@ -45,34 +46,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_in7yo"]
-resource_name = "Guard"
-length = 0.66667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Guard"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_vkkpn"]
@@ -137,6 +110,30 @@ tracks/2/path = NodePath("AnimatedSprite3D")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.665, 0, 0.2, 1, 0.75, 0.665, 0, 0.6, 1, 0, 0.665, 0)
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area3D:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.433333, 0.666667),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.433333, 0.666667),
+"transitions": PackedFloat32Array(1e-05, 7.77931e-05, 1e-05, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_f334i"]
 length = 0.001
@@ -171,6 +168,30 @@ tracks/2/path = NodePath("AnimatedSprite3D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.665, 0)
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area3D:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_olmmg"]
 resource_name = "Walk"
@@ -200,13 +221,41 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_in7yo"]
+resource_name = "Skill"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Guard"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f334i"]
 _data = {
 &"Flinch": SubResource("Animation_g8xg8"),
-&"Guard": SubResource("Animation_in7yo"),
 &"Idle": SubResource("Animation_vkkpn"),
 &"Parry": SubResource("Animation_h6cwe"),
 &"RESET": SubResource("Animation_f334i"),
+&"Skill": SubResource("Animation_in7yo"),
 &"Walk": SubResource("Animation_olmmg")
 }
 
@@ -368,6 +417,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_tc1ou"]
+
 [node name="Weyland" type="CharacterBody3D" node_paths=PackedStringArray("health_bar", "animation_player", "nav_agent", "sprite", "state_machine")]
 script = ExtResource("1_cx0wv")
 health_bar = NodePath("HealthBar")
@@ -426,9 +477,24 @@ script = ExtResource("8_b4iq3")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dkynreasuvr0x"
 
+[node name="Parry" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("9_bktkn")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://pgfi3a8j70"
+
 [node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_waqog")]
 offset_left = 256.0
 offset_top = 64.0
 offset_right = -1244.0
 offset_bottom = -816.0
 player = NodePath("..")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.7, 0)
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_tc1ou")
+disabled = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

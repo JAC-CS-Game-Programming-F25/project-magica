@@ -84,3 +84,5 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_abpih")
 animation = &"Idle"
 frame_progress = 0.938418
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

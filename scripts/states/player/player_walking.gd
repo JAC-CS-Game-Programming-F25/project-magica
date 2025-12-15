@@ -21,9 +21,9 @@ func physics_process(delta: float) -> void:
 		return
 	var next_position: Vector3 = player.nav_agent.get_next_path_position()
 	if player.position.x < next_position.x:
-		player.sprite.flip_h = false
+		player.scale.x = abs(player.scale.x)
 	else:
-		player.sprite.flip_h	= true
+		player.scale.x = -1 * abs(player.scale.x)
 		
 	player.animation_player.play("Walk") 
 	player.global_position = player.global_position.move_toward(

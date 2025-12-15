@@ -28,7 +28,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _should_player_move(event, "Er_Move"):
 			er.set_movement_target(closest_point_on_navmesh)
 
-
 func _mouse_clicked(event: InputEvent) -> bool:
 	return event is InputEventMouseButton and \
 		event.button_index == MOUSE_BUTTON_LEFT and \

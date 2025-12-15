@@ -3,17 +3,19 @@ extends CharacterBody3D
 class_name Entity
 
 @export var animation_player: AnimationPlayer
+@export var collision_shape: CollisionShape3D
 @export var nav_agent: NavigationAgent3D
 @export var sprite: AnimatedSprite3D
 @export var state_machine: StateMachine
 
-@export var movement_speed: float = 2.0
+@export var movement_speed: float = 1.25
 @export var max_health: float
 @export var flinch_duration_frames: int = 10
 
 var health: float
+var is_dead: bool = false
 
-func take_damage(damage: float) -> void:
+func take_damage(damage: float, _damager: Node3D = null) -> void:
 	health -= damage
 
 func attack() -> void:

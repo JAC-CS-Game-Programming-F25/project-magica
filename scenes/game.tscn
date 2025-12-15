@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://drdyyvmdadnif"]
+[gd_scene load_steps=10 format=3 uid="uid://drdyyvmdadnif"]
 
 [ext_resource type="PackedScene" uid="uid://dy5m6rt0mpadq" path="res://scenes/level.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bwmkjfwdwgvne" path="res://scripts/game.gd" id="1_feb5d"]
-[ext_resource type="PackedScene" uid="uid://bodyyroed4bv" path="res://scenes/entities/weyland.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://bx6dh8iutymnp" path="res://scenes/entities/enemy_wolf.tscn" id="2_ryrav"]
-[ext_resource type="PackedScene" uid="uid://dcswce88elclm" path="res://scenes/entities/er.tscn" id="3_gee14"]
+[ext_resource type="PackedScene" uid="uid://bodyyroed4bv" path="res://scenes/entities/player/weyland.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://bx6dh8iutymnp" path="res://scenes/entities/enemy/wolf.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://b2iacv8xykenm" path="res://scenes/ui/pause_menu.tscn" id="4_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://b5seqprcbqftm" path="res://scenes/entities/sal.tscn" id="4_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://dbm8issxfxdxy" path="res://assets/UI/HealthBar.png" id="5_7jktm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0rp4"]
@@ -29,11 +27,7 @@ script = ExtResource("1_feb5d")
 [node name="Wolf" parent="." instance=ExtResource("2_ryrav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66928, 0, 0)
 
-[node name="Er" parent="." instance=ExtResource("3_gee14")]
-
 [node name="Weyland" parent="." instance=ExtResource("2_e2o6t")]
-
-[node name="Sal" parent="." instance=ExtResource("4_u5sy4")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vw623")

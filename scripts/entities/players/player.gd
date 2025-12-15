@@ -18,8 +18,8 @@ func set_movement_target(movement_target: Vector3) -> void:
 	
 	state_machine.change_state(state_machine.current_state, "walking", movement_target)
 
-func take_damage(damage: float) -> void:
-	super.take_damage(damage)
+func take_damage(damage: float, _damager: Node3D = null) -> void:
+	super.take_damage(damage, _damager)
 	
 	time_since_damage = 0
 	internal_damage = health

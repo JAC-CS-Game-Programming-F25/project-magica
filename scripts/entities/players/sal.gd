@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 			var candidate_health: float = health + max_health * heal_percentage / 100.0 * delta
 			health = clamp(candidate_health, candidate_health, max_health)
 
-func take_damage(damage: float) -> void:
+func take_damage(damage: float, _damager: Node3D = null) -> void:
 	time_since_damage = 0
 	
 	internal_damage = health
