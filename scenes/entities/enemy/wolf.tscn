@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bx6dh8iutymnp"]
+[gd_scene load_steps=45 format=3 uid="uid://bx6dh8iutymnp"]
 
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="1_13wxg"]
 [ext_resource type="Script" uid="uid://c4b5rvgehjb7e" path="res://scripts/entities/enemies/wolf.gd" id="1_i1w6i"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://drwsd7vwcx4to" path="res://scripts/states/enemy/enemy_death.gd" id="6_tvhwo"]
 [ext_resource type="Script" uid="uid://oabgvx0ljkgh" path="res://scripts/states/enemy/enemy_chase.gd" id="7_k62fw"]
 [ext_resource type="Script" uid="uid://b78ksi5ut6b22" path="res://scripts/states/enemy/enemy_attack.gd" id="8_sq271"]
+[ext_resource type="AudioStream" uid="uid://bjmd17614dfhu" path="res://assets/SFX/Hit.mp3" id="9_tvhwo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k21ev"]
 transparency = 1
@@ -451,6 +452,7 @@ collision_shape = NodePath("CollisionShape3D")
 nav_agent = NodePath("NavigationAgent3D")
 sprite = NodePath("AnimatedSprite3D")
 state_machine = NodePath("StateMachine")
+max_health = 10000.0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -512,6 +514,11 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WhipHitbox"]
 shape = SubResource("SphereShape3D_44knv")
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_tvhwo")
+volume_db = -5.0
+pitch_scale = 2.0
 
 [connection signal="sprite_frames_changed" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_sprite_frames_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

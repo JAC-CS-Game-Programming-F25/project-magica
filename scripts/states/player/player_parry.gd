@@ -33,6 +33,9 @@ func physics_process(_delta: float) -> void:
 	player.animation_player.play("Parry")
 
 func _should_flip_player() -> bool:
+	if damager == null: 
+		return false
+		
 	return damager.global_position.x < player.global_position.x and player.scale.x > 0 \
 		or damager.global_position.x > player.global_position.x and player.scale.x < 0
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bodyyroed4bv"]
+[gd_scene load_steps=44 format=3 uid="uid://bodyyroed4bv"]
 
 [ext_resource type="Script" uid="uid://cllskjabxvpch" path="res://scripts/entities/players/weyland.gd" id="1_cx0wv"]
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_ev6hy"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://dkynreasuvr0x" path="res://scripts/states/player/player_skill_state.gd" id="8_b4iq3"]
 [ext_resource type="Script" uid="uid://pgfi3a8j70" path="res://scripts/states/player/player_parry.gd" id="9_bktkn"]
 [ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/ui/health_bar.tscn" id="9_waqog"]
+[ext_resource type="AudioStream" uid="uid://0ep35ju2cpsi" path="res://assets/SFX/Parry.mp3" id="11_tc1ou"]
+[ext_resource type="AudioStream" uid="uid://bjmd17614dfhu" path="res://assets/SFX/Hit.mp3" id="12_gapkc"]
+[ext_resource type="AudioStream" uid="uid://wxijwssqwxi5" path="res://assets/SFX/Guard.mp3" id="13_coqbj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnktw"]
 transparency = 1
@@ -193,34 +196,6 @@ tracks/4/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_olmmg"]
-resource_name = "Walk"
-length = 0.66667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Walk"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
 [sub_resource type="Animation" id="Animation_in7yo"]
 resource_name = "Skill"
 length = 0.66667
@@ -235,6 +210,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"Guard"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_olmmg"]
+resource_name = "Walk"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Walk"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -428,7 +431,7 @@ nav_agent = NodePath("NavigationAgent3D")
 sprite = NodePath("AnimatedSprite3D")
 state_machine = NodePath("StateMachine")
 movement_speed = 1.7
-max_health = 100.0
+max_health = 200.0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -485,10 +488,10 @@ player = NodePath("../..")
 metadata/_custom_type_script = "uid://pgfi3a8j70"
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_waqog")]
-offset_left = 256.0
-offset_top = 64.0
-offset_right = -1244.0
-offset_bottom = -816.0
+offset_left = 216.0
+offset_top = -32.0
+offset_right = -1284.0
+offset_bottom = -912.0
 player = NodePath("..")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -498,6 +501,19 @@ monitoring = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_tc1ou")
 disabled = true
+
+[node name="ParrySFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_tc1ou")
+volume_db = -7.0
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_gapkc")
+volume_db = -5.0
+pitch_scale = 2.0
+
+[node name="GuardSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_coqbj")
+volume_db = -3.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

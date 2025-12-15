@@ -17,7 +17,7 @@ func process(_delta: float) -> void:
 
 func physics_process(delta: float) -> void:
 	if reached_target():
-		player.animation_player.play("Idle")
+		player.change_state("Idle")
 		return
 	var next_position: Vector3 = player.nav_agent.get_next_path_position()
 	if player.position.x < next_position.x:

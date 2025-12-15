@@ -38,14 +38,20 @@ func physics_process(delta: float) -> void:
 	
 	if enemy is Wolf:
 		if enemy.timer > enemy.knife_interval:
-			enemy.timer = 0
-			var knife: Projectile = load('res://scenes/objects/rose_dagger.tscn').instantiate()
-			var pos: Vector3 = (enemy.collision_shape as CollisionShape3D).global_position
-			knife.global_position = Vector3(pos.x, pos.y + 0.5, pos.z)
-			knife.origin = enemy
-			knife.scale.x = knife.scale.x if enemy.scale.x > 0 else -knife.scale.x
-			enemy.active_projectile = knife
-			add_child(enemy.active_projectile)
+			var game: Game = get_tree().get_first_node_in_group("Game") as Game
+	
+			for child: Node in game.get_children():
+				if child is Player:
+					enemy.timer = 0
+					var knife: Projectile = load('res://scenes/objects/rose_dagger.tscn').instantiate()
+					var pos: Vector3 = (enemy.collision_shape as CollisionShape3D).global_position
+					knife.global_position = Vector3(pos.x, pos.y + 0.5, pos.z)
+					knife.origin = enemy
+					knife.is_friendly = false
+					knife.scale.x = knife.scale.x if enemy.scale.x > 0 else -knife.scale.x
+					knife.damage = 25.0
+					enemy.active_projectile = knife
+					enemy.get_parent().add_child(enemy.active_projectile)
 	
 		if enemy.active_projectile == null:
 			enemy.timer += 1

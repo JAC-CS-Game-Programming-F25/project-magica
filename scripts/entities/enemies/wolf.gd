@@ -35,14 +35,17 @@ func _on_whip_hitbox_body_entered(body: Node3D) -> void:
 	(body as Player).take_damage(50.0, self)
 
 func take_damage(damage: float, _damager: Node3D = null) -> void:
+	if health <= 0:
+		return
+	
+	$HitSFX.play()
 	super.take_damage(damage, _damager)
-	print('wolf took damage')
 	
 	time_since_damage = 0
 	is_damaged = true
 	sprite.modulate = Color(1., 0.4, 0.4, 1.)
 	
-	if health < 0:
+	if health <= 0 and state_machine.current_state.name != "Death":
 		state_machine.change_state(state_machine.current_state, "Death")
 
 

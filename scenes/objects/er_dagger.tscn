@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://x3tibnx331c0"]
+
+[ext_resource type="Script" uid="uid://p752uuv1hk04" path="res://scripts/objects/projectile.gd" id="1_n606c"]
+[ext_resource type="Texture2D" uid="uid://blnrheicu7dff" path="res://assets/sprites/Dagger.png" id="2_k5gig"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n606c"]
+radius = 0.1
+height = 0.6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kqcw"]
+atlas = ExtResource("2_k5gig")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np01h"]
+atlas = ExtResource("2_k5gig")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vjkj"]
+animations = [{
+"frames": [{
+"duration": 0.1,
+"texture": SubResource("AtlasTexture_7kqcw")
+}],
+"loop": false,
+"name": &"Appear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np01h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="ErDagger" type="Area3D" node_paths=PackedStringArray("hitbox", "sprite")]
+script = ExtResource("1_n606c")
+hitbox = NodePath("CollisionShape3D")
+sprite = NodePath("AnimatedSprite3D")
+metadata/_custom_type_script = "uid://p752uuv1hk04"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_n606c")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_6vjkj")
+animation = &"Idle"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b5seqprcbqftm"]
+[gd_scene load_steps=36 format=3 uid="uid://b5seqprcbqftm"]
 
 [ext_resource type="Script" uid="uid://cx1cmqof5fhk7" path="res://scripts/entities/players/sal.gd" id="1_85axf"]
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_465cw"]
@@ -8,7 +8,10 @@
 [ext_resource type="Script" uid="uid://bs8ne5sl4j1xr" path="res://scripts/states/player/player_idle.gd" id="6_rk52e"]
 [ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="7_3ckbd"]
 [ext_resource type="Script" uid="uid://dkynreasuvr0x" path="res://scripts/states/player/player_skill_state.gd" id="8_ulwl2"]
+[ext_resource type="Script" uid="uid://ceyvoe8alucuq" path="res://scripts/states/player/player_shoot_state.gd" id="9_k1mwk"]
 [ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/ui/health_bar.tscn" id="9_nhiox"]
+[ext_resource type="AudioStream" uid="uid://cdyoki8fihvpk" path="res://assets/SFX/Bow.mp3" id="11_wgxwq"]
+[ext_resource type="AudioStream" uid="uid://bjmd17614dfhu" path="res://assets/SFX/Hit.mp3" id="12_s62py"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsodm"]
 transparency = 1
@@ -213,6 +216,34 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_k1mwk"]
+resource_name = "Shoot"
+length = 0.300003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Shoot"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(3.62917e-05, 2.7504e-05, 1e-05),
+"update": 1,
+"values": [0, 0, 0]
+}
+
 [sub_resource type="Animation" id="Animation_gam8m"]
 resource_name = "Walk"
 length = 0.66667
@@ -246,8 +277,12 @@ _data = {
 &"Flinch": SubResource("Animation_513qc"),
 &"Idle": SubResource("Animation_85axf"),
 &"RESET": SubResource("Animation_465cw"),
+&"Shoot": SubResource("Animation_k1mwk"),
 &"Walk": SubResource("Animation_gam8m")
 }
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k1mwk"]
+radius = 3.0
 
 [node name="Sal" type="CharacterBody3D" node_paths=PackedStringArray("health_bar", "animation_player", "collision_shape", "nav_agent", "sprite", "state_machine")]
 script = ExtResource("1_85axf")
@@ -258,6 +293,7 @@ nav_agent = NodePath("NavigationAgent3D")
 sprite = NodePath("AnimatedSprite3D")
 state_machine = NodePath("StateMachine")
 movement_speed = 2.0
+max_health = 100.0
 metadata/_custom_type_script = "uid://dsgmybmfal0sc"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
@@ -309,9 +345,31 @@ script = ExtResource("8_ulwl2")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dkynreasuvr0x"
 
+[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("9_k1mwk")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://ceyvoe8alucuq"
+
 [node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_nhiox")]
-offset_left = 256.0
-offset_top = 128.0
-offset_right = -1244.0
-offset_bottom = -752.0
+offset_left = 184.0
+offset_top = 32.0
+offset_right = -1316.0
+offset_bottom = -848.0
 player = NodePath("..")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_k1mwk")
+
+[node name="BowSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_wgxwq")
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_s62py")
+volume_db = -5.0
+pitch_scale = 2.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

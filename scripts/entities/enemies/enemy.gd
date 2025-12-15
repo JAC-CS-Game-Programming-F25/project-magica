@@ -31,7 +31,6 @@ func _on_detection_sphere_body_exited(body: Node3D) -> void:
 			break
 	
 	if nearby_players.is_empty():
-		print('called')
 		target = null
 		state_machine.change_state(state_machine.current_state, "Idle")
 		return

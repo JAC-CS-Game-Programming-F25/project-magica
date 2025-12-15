@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://ckkuen52sxhtv"]
+
+[ext_resource type="AudioStream" uid="uid://cdyoki8fihvpk" path="res://assets/SFX/Bow.mp3" id="3_kq7b2"]
+[ext_resource type="AudioStream" uid="uid://wxijwssqwxi5" path="res://assets/SFX/Guard.mp3" id="4_02gw7"]
+[ext_resource type="AudioStream" uid="uid://dir7xunk18puy" path="res://assets/SFX/Dagger.mp3" id="4_ujhup"]
+[ext_resource type="AudioStream" uid="uid://bjmd17614dfhu" path="res://assets/SFX/Hit.mp3" id="5_ujhup"]
+[ext_resource type="AudioStream" uid="uid://0ep35ju2cpsi" path="res://assets/SFX/Parry.mp3" id="7_064dn"]
+[ext_resource type="AudioStream" uid="uid://cfex82pr5jhln" path="res://assets/SFX/Whip.mp3" id="8_ic5jq"]
+
+[sub_resource type="GDScript" id="GDScript_njtn3"]
+script/source = "extends Node3D
+
+var sound_effect_dict: Dictionary = {}
+
+@export var sound_effects: Array[Sounds]
+
+func _ready() -> void:
+	for sound_effect: Sounds in sound_effects:
+		sound_effect_dict[sound_effect.type] = sound_effect
+
+func create_audio(type: Sounds.SOUND_EFFECT_TYPE) -> void:
+	if sound_effect_dict.has(type):
+		var sound_effect: Sounds = sound_effect_dict[type]
+		sound_effect.change_audio_count(1)
+		var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
+		add_child(new_audio)
+		new_audio.stream = sound_effect.sound_effect
+		new_audio.volume_db = sound_effect.volume
+		new_audio.pitch_scale = sound_effect.pitch_scale
+		new_audio.finished.connect(sound_effect.on_audio_finished)
+		new_audio.finished.connect(new_audio.queue_free)
+		new_audio.play()
+	else:
+		push_error(\"Audio Manager failed to find setting for type \", type)
+"
+
+[sub_resource type="GDScript" id="GDScript_kq7b2"]
+script/source = "class_name Sounds
+extends Resource
+
+enum SOUND_EFFECT_TYPE {
+	BOW,
+	DAGGER,
+	GUARD,
+	HIT,
+	PARRY,
+	WHIP
+}
+
+@export var type: SOUND_EFFECT_TYPE 
+@export var sound_effect: AudioStreamMP3
+@export_range(-40, 20) var volume: float = 0 
+@export_range(0.0, 1.0,.01) var pitch_randomness: float = 0.0 
+"
+
+[sub_resource type="Resource" id="Resource_064dn"]
+script = SubResource("GDScript_kq7b2")
+type = 0
+sound_effect = ExtResource("3_kq7b2")
+volume = 0.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://utsiw0vnb1r7"
+
+[sub_resource type="Resource" id="Resource_if78k"]
+script = SubResource("GDScript_kq7b2")
+type = 1
+sound_effect = ExtResource("4_ujhup")
+volume = 0.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://utsiw0vnb1r7"
+
+[sub_resource type="Resource" id="Resource_8igv3"]
+script = SubResource("GDScript_kq7b2")
+type = 2
+sound_effect = ExtResource("4_02gw7")
+volume = 0.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://utsiw0vnb1r7"
+
+[sub_resource type="Resource" id="Resource_2y2jw"]
+script = SubResource("GDScript_kq7b2")
+type = 3
+sound_effect = ExtResource("5_ujhup")
+volume = 0.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://utsiw0vnb1r7"
+
+[sub_resource type="Resource" id="Resource_2y5yn"]
+script = SubResource("GDScript_kq7b2")
+type = 4
+sound_effect = ExtResource("7_064dn")
+volume = 0.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://utsiw0vnb1r7"
+
+[sub_resource type="Resource" id="Resource_oucy0"]
+script = SubResource("GDScript_kq7b2")
+type = 5
+sound_effect = ExtResource("8_ic5jq")
+volume = 0.0
+pitch_randomness = 0.0
+metadata/_custom_type_script = "uid://utsiw0vnb1r7"
+
+[node name="AudioManager" type="Node3D"]
+script = SubResource("GDScript_njtn3")
+sound_effects = Array[SubResource("GDScript_kq7b2")]([SubResource("Resource_064dn"), SubResource("Resource_if78k"), SubResource("Resource_8igv3"), SubResource("Resource_2y2jw"), SubResource("Resource_2y5yn"), SubResource("Resource_oucy0")])

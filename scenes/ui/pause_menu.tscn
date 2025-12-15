@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2iacv8xykenm"]
 
-[ext_resource type="Script" uid="uid://b5y8rpo8mb88j" path="res://scripts/pause_menu.gd" id="1_n87rw"]
+[ext_resource type="Script" uid="uid://b5y8rpo8mb88j" path="res://scripts/ui/pause_menu.gd" id="1_n87rw"]
 
 [node name="Control" type="Control"]
 process_mode = 3
@@ -14,8 +14,8 @@ script = ExtResource("1_n87rw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 1800.0
-offset_bottom = 900.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(0, 0, 0, 0.615686)
 
 [node name="Resume" type="Button" parent="."]

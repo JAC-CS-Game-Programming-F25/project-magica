@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dcswce88elclm"]
+[gd_scene load_steps=31 format=3 uid="uid://dcswce88elclm"]
 
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="2_224l6"]
 [ext_resource type="Texture2D" uid="uid://c6dxm1b8sfj1t" path="res://assets/sprites/ErSpriteSheet.png" id="3_x3p5h"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://byldbh7p2q05k" path="res://scripts/states/player/player_walking.gd" id="7_872iv"]
 [ext_resource type="Script" uid="uid://dkynreasuvr0x" path="res://scripts/states/player/player_skill_state.gd" id="8_o1t7h"]
 [ext_resource type="PackedScene" uid="uid://d1omu3m5k7fxh" path="res://scenes/ui/health_bar.tscn" id="9_3ngtb"]
+[ext_resource type="AudioStream" uid="uid://bjmd17614dfhu" path="res://assets/SFX/Hit.mp3" id="10_qcbmh"]
+[ext_resource type="AudioStream" uid="uid://dir7xunk18puy" path="res://assets/SFX/Dagger.mp3" id="11_jy84j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpy5q"]
 transparency = 1
@@ -223,6 +225,9 @@ _data = {
 &"Walk": SubResource("Animation_gam8m")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_55u4e"]
+radius = 3.0
+
 [node name="Er" type="CharacterBody3D" node_paths=PackedStringArray("health_bar", "animation_player", "collision_shape", "nav_agent", "sprite", "state_machine")]
 script = ExtResource("4_224l6")
 health_bar = NodePath("HealthBar")
@@ -232,6 +237,7 @@ nav_agent = NodePath("NavigationAgent3D")
 sprite = NodePath("AnimatedSprite3D")
 state_machine = NodePath("StateMachine")
 movement_speed = 2.3
+max_health = 100.0
 metadata/_custom_type_script = "uid://dsgmybmfal0sc"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
@@ -284,8 +290,25 @@ player = NodePath("../..")
 metadata/_custom_type_script = "uid://dkynreasuvr0x"
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_3ngtb")]
-offset_left = 222.0
-offset_top = 183.0
-offset_right = -1278.0
-offset_bottom = -697.0
+offset_left = 160.0
+offset_top = 96.0
+offset_right = -1340.0
+offset_bottom = -784.0
 player = NodePath("..")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_55u4e")
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_qcbmh")
+volume_db = -5.0
+pitch_scale = 2.0
+
+[node name="DaggerSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_jy84j")
+volume_db = -3.0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

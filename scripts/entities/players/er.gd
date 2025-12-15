@@ -2,6 +2,15 @@ extends Player
 
 class_name Er
 
+@export var knife_interval: int = 300
+@export var knife_damage: float = 25.0
+
+var active_projectile: Projectile = null
+var timer: int = 0
+
+var target: Enemy = null
+var enemies_in_range: Array[Enemy] = []
+
 func _ready() -> void:
 	nav_agent.path_desired_distance = 0.5
 	nav_agent.target_desired_distance = 0.5
@@ -16,23 +25,38 @@ func _ready() -> void:
 	
 	game_status.connect(_on_game_status_change)
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("Weyland_Skill"):
-		state_machine.change_state(state_machine.current_state, "Skill")
-	elif Input.is_action_just_released("Weyland_Skill"):
-		state_machine.change_state(state_machine.current_state, "Idle")
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		take_damage(10.0)
-
 func _physics_process(delta: float) -> void:
-		time_since_damage += delta
+	time_since_damage += delta
 		
-		if time_since_damage > heal_timer:
-			var candidate_health: float = health + max_health * heal_percentage / 100.0 * delta
-			health = clamp(candidate_health, candidate_health, max_health)
+	if time_since_damage > heal_timer:
+		var candidate_health: float = health + max_health * heal_percentage / 100.0 * delta
+		health = clamp(candidate_health, candidate_health, max_health)
+	
+	if timer > knife_interval and target != null:
+		$DaggerSFX.play()
+		timer = 0
+		var knife: Projectile = load('res://scenes/objects/er_dagger.tscn').instantiate()
+		var pos: Vector3 = (collision_shape as CollisionShape3D).global_position
+		knife.position = Vector3(pos.x, pos.y + 0.25, pos.z)
+		knife.origin = self
+		knife.is_friendly = true
+		knife.scale.x = knife.scale.x if scale.x > 0 else -scale.x
+		knife.damage = knife_damage
+		active_projectile = knife
+		get_parent().add_child(knife)
+		return
+	
+	if active_projectile == null:
+		timer += 1
 
 func take_damage(damage: float, _damager: Node3D = null) -> void:
+	super.take_damage(damage, _damager)
+	$HitSFX.play()
+	if health <= 0:
+		var game: Game = get_tree().get_first_node_in_group("Game") as Game
+		game.player_dead.emit()
+		get_parent().remove_child(self)
+		return
 	time_since_damage = 0
 	
 	internal_damage = health
@@ -45,5 +69,16 @@ func take_internal_damage(damage: float) -> void:
 	time_since_damage = 0
 	health_bar.take_internal_damage()
 
-func use_skill() -> void:
-	take_internal_damage(max_health * 0.05 / 60)
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is Enemy:
+		if enemies_in_range.size() == 0:
+			target = body
+		enemies_in_range.append(body)
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	for i in range(enemies_in_range.size()):
+		if enemies_in_range[i] == body:
+			enemies_in_range.remove_at(i)
+	
+	if enemies_in_range.size() == 0:
+		target = null

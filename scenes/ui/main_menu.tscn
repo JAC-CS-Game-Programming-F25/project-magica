@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://damei2pr1oq6r"]
+[gd_scene load_steps=6 format=3 uid="uid://damei2pr1oq6r"]
 
-[ext_resource type="Script" uid="uid://byrwrewx323he" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://byrwrewx323he" path="res://scripts/ui/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://ds4tvbin2bkap" path="res://assets/UI/TitleBg.png" id="2_ekxnf"]
 [ext_resource type="AudioStream" uid="uid://c1urldmdcj4gn" path="res://assets/Music/MenuMusic.mp3" id="3_1g8jr"]
+[ext_resource type="AudioStream" uid="uid://1pak0na35038" path="res://assets/SFX/Select.mp3" id="4_m1kxf"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bqqt6"]
 
@@ -38,10 +39,13 @@ offset_bottom = 901.0
 theme_override_font_sizes/font_size = 80
 text = "Quit"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1g8jr")
-volume_db = -15.927
+volume_db = -10.0
 autoplay = true
+
+[node name="ButtonPressSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_m1kxf")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
