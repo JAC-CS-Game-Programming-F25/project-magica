@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://drdyyvmdadnif"]
+[gd_scene load_steps=13 format=3 uid="uid://drdyyvmdadnif"]
 
 [ext_resource type="PackedScene" uid="uid://dy5m6rt0mpadq" path="res://scenes/level.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bwmkjfwdwgvne" path="res://scripts/game.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://bodyyroed4bv" path="res://scenes/entities/player/weyland.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://bx6dh8iutymnp" path="res://scenes/entities/enemy/wolf.tscn" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://dcswce88elclm" path="res://scenes/entities/player/er.tscn" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://b2iacv8xykenm" path="res://scenes/ui/pause_menu.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://b5seqprcbqftm" path="res://scenes/entities/player/sal.tscn" id="4_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://dbm8issxfxdxy" path="res://assets/UI/HealthBar.png" id="5_7jktm"]
+[ext_resource type="AudioStream" uid="uid://b1ohirmt4lflx" path="res://assets/Music/LevelMusic.mp3" id="7_u5sy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0rp4"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -21,13 +24,17 @@ sky = SubResource("Sky_gvxe5")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" groups=["Game"]]
 script = ExtResource("1_feb5d")
+
+[node name="Sal" parent="." instance=ExtResource("4_u5sy4")]
+
+[node name="Er" parent="." instance=ExtResource("3_gee14")]
+
+[node name="Weyland" parent="." instance=ExtResource("2_e2o6t")]
 
 [node name="Wolf" parent="." instance=ExtResource("2_ryrav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66928, 0, 0)
-
-[node name="Weyland" parent="." instance=ExtResource("2_e2o6t")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vw623")
@@ -51,3 +58,8 @@ visible = false
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(408, 128)
 texture = ExtResource("5_7jktm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_u5sy4")
+volume_db = -16.865
+autoplay = true

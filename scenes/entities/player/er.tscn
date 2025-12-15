@@ -223,13 +223,15 @@ _data = {
 &"Walk": SubResource("Animation_gam8m")
 }
 
-[node name="Er" type="CharacterBody3D" node_paths=PackedStringArray("health_bar", "animation_player", "nav_agent", "sprite", "state_machine")]
+[node name="Er" type="CharacterBody3D" node_paths=PackedStringArray("health_bar", "animation_player", "collision_shape", "nav_agent", "sprite", "state_machine")]
 script = ExtResource("4_224l6")
 health_bar = NodePath("HealthBar")
 animation_player = NodePath("AnimationPlayer")
+collision_shape = NodePath("CollisionShape3D")
 nav_agent = NodePath("NavigationAgent3D")
 sprite = NodePath("AnimatedSprite3D")
 state_machine = NodePath("StateMachine")
+movement_speed = 2.3
 metadata/_custom_type_script = "uid://dsgmybmfal0sc"
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
