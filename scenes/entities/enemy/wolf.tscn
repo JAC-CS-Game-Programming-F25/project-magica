@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bx6dh8iutymnp"]
+[gd_scene load_steps=45 format=3 uid="uid://bx3w7gquo41nu"]
 
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="1_13wxg"]
 [ext_resource type="Script" uid="uid://c4b5rvgehjb7e" path="res://scripts/entities/enemies/wolf.gd" id="1_i1w6i"]
@@ -448,12 +448,13 @@ radius = 3.5
 [node name="Wolf" type="CharacterBody3D" node_paths=PackedStringArray("detection_sphere", "animation_player", "collision_shape", "nav_agent", "sprite", "state_machine")]
 script = ExtResource("1_i1w6i")
 detection_sphere = NodePath("DetectionSphere")
+attack_damage = 50.0
 animation_player = NodePath("AnimationPlayer")
 collision_shape = NodePath("CollisionShape3D")
 nav_agent = NodePath("NavigationAgent3D")
 sprite = NodePath("AnimatedSprite3D")
 state_machine = NodePath("StateMachine")
-max_health = 10000.0
+max_health = 1000.0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)

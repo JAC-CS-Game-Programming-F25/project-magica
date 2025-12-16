@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dpr6xthfrtnqh" path="res://assets/textures/Roses1.png" id="4_f2txt"]
 [ext_resource type="Texture2D" uid="uid://vqwsogu8eodj" path="res://assets/textures/Roses2.png" id="5_f2txt"]
 [ext_resource type="Texture2D" uid="uid://pybhitcdggba" path="res://assets/sprites/RooftopBG.png" id="7_klq6b"]
-[ext_resource type="PackedScene" uid="uid://bx6dh8iutymnp" path="res://scenes/entities/enemy/wolf.tscn" id="8_bbk5w"]
+[ext_resource type="PackedScene" path="res://scenes/entities/enemy/wolf.tscn" id="8_bbk5w"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_f2txt"]
 vertices = PackedVector3Array(-24.5, 0.02, -2, -24.5, 0.02, 2, 24.5, 0.02, 2, 24.5, 0.02, -2)
