@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		$DaggerSFX.play()
 		timer = 0
 		var projectile: Projectile = ProjectileFactory.create_instance(
-			"dagger",
+			ProjectileTypes.dagger,
 			self,
 			25.0,
 			target
@@ -57,7 +57,7 @@ func take_damage(damage: float, _damager: Node3D = null) -> void:
 	
 	internal_damage = health
 	health_bar.take_damage()
-	state_machine.change_state(state_machine.current_state, "Flinch")
+	state_machine.change_state(state_machine.current_state, EntityStates.flinch)
 
 
 func take_internal_damage(damage: float) -> void:

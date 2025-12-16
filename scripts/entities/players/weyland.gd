@@ -27,13 +27,13 @@ func _process(delta: float) -> void:
 		take_damage(10.0)
 	
 	var state_name: String = state_machine.current_state.name
-	if state_name == "Flinch" or state_name == "Parry":
+	if state_name == EntityStates.flinch or state_name == EntityStates.parry:
 		return
 	
 	if Input.is_action_just_pressed("Weyland_Skill"):
-		state_machine.change_state(state_machine.current_state, "Skill")
+		state_machine.change_state(state_machine.current_state, EntityStates.skill)
 	elif Input.is_action_just_released("Weyland_Skill"):
-		state_machine.change_state(state_machine.current_state, "Idle")
+		state_machine.change_state(state_machine.current_state, EntityStates.idle)
 
 func _physics_process(delta: float) -> void:
 	if health < internal_damage and !is_guarding:
@@ -51,7 +51,7 @@ func take_damage(damage: float, damager: Node3D = null) -> void:
 		$ParrySFX.play()
 		health = clamp(health + internal_damage - health, health + internal_damage - health, max_health)
 		health_bar.heal()
-		state_machine.change_state(state_machine.current_state, "Parry", damager)
+		state_machine.change_state(state_machine.current_state, EntityStates.parry, damager)
 		return
 	
 	time_since_damage = 0
@@ -66,7 +66,7 @@ func take_damage(damage: float, damager: Node3D = null) -> void:
 			return
 		internal_damage = health
 		health_bar.take_damage()
-		state_machine.change_state(state_machine.current_state, "Flinch")
+		state_machine.change_state(state_machine.current_state, EntityStates.flinch)
 		return
 	else:
 		$GuardSFX.play()
@@ -90,5 +90,5 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Parry":
+	if anim_name == EntityStates.parry:
 		(state_machine.current_state as PlayerParryState).parry_done.emit()

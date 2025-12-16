@@ -12,4 +12,4 @@ func process(_delta: float) -> void:
 	pass
 
 func physics_process(_delta: float) -> void:
-	player.animation_player.play("Idle")
+	player.animation_player.play(EntityStates.idle)

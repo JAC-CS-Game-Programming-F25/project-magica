@@ -269,7 +269,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_dnync"]
-resource_name = "Die"
+resource_name = "Death"
 length = 0.733337
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -434,7 +434,7 @@ tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.74, 0)
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwinu"]
 _data = {
 &"Attack": SubResource("Animation_05v88"),
-&"Die": SubResource("Animation_dnync"),
+&"Death": SubResource("Animation_dnync"),
 &"Idle": SubResource("Animation_aciup"),
 &"RESET": SubResource("Animation_0mcmr"),
 &"Walk": SubResource("Animation_l322y")

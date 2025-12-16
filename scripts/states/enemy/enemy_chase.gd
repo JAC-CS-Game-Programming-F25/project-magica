@@ -8,7 +8,7 @@ func enter(args = null) -> void:
 	assert(args is Player, "Always pass player to EnemyChaseState::enter()")
 	target = args
 	enemy.nav_agent.target_position = target.position
-	enemy.animation_player.play("Walk")
+	enemy.animation_player.play(EntityStates.walk)
 
 func exit() -> void:
 	pass
@@ -17,7 +17,7 @@ func process(_delta: float) -> void:
 	pass
 
 func physics_process(delta: float) -> void:
-	enemy.animation_player.play("Walk")
+	enemy.animation_player.play(EntityStates.walk)
 	
 	if !_reached_target():
 		var next_position: Vector3 = enemy.nav_agent.get_next_path_position()
@@ -26,7 +26,7 @@ func physics_process(delta: float) -> void:
 		else:
 			enemy.scale.x = -1 * abs(enemy.scale.x)
 		
-		enemy.animation_player.play("Walk") 
+		enemy.animation_player.play(EntityStates.walk) 
 		enemy.global_position = enemy.global_position.move_toward(
 			next_position, 
 			delta * enemy.movement_speed
@@ -34,7 +34,7 @@ func physics_process(delta: float) -> void:
 	else:
 		if _get_distance(enemy.global_position, enemy.target.global_position) < 0.85:
 			if randi() % 20 == 0:
-				enemy.state_machine.change_state(enemy.state_machine.current_state, "Attack")
+				enemy.state_machine.change_state(enemy.state_machine.current_state, EntityStates.attack)
 			return
 		else:
 			enemy.nav_agent.target_position = enemy.target.global_position
@@ -43,7 +43,7 @@ func physics_process(delta: float) -> void:
 		if enemy.timer > enemy.knife_interval:
 			enemy.timer = 0
 			var knife: Projectile = ProjectileFactory.create_instance(
-				"rose",
+				ProjectileTypes.rose,
 				enemy,
 				25.0,
 				target

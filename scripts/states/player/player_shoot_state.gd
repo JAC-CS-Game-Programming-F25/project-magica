@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func enter(args = null) -> void:
 	assert(args is Enemy, "Pass in enemy when changing to shooting state")
-	player.animation_player.play("Shoot")
+	player.animation_player.play(EntityStates.shoot)
 	target = args
 	player.scale.x = -abs(player.scale.x) if _should_flip() else abs(player.scale.x)
 
@@ -23,11 +23,11 @@ func process(_delta: float) -> void:
 	pass
 
 func physics_process(_delta: float) -> void:
-	player.animation_player.play("Shoot")
+	player.animation_player.play(EntityStates.shoot)
 
 func _on_anim_done() -> void:
 	_shoot_arrow()
-	player.state_machine.change_state(player.state_machine.current_state, "Idle")
+	player.state_machine.change_state(player.state_machine.current_state, EntityStates.idle)
 
 func _shoot_arrow() -> void:
 	(player as Sal).bow_sfx.play()
@@ -40,13 +40,13 @@ func _shoot_arrow() -> void:
 				player.scale.x = -abs(player.scale.x) if _should_flip() else abs(player.scale.x)
 	
 	var projectile: Projectile = ProjectileFactory.create_instance(
-		"arrow",
+		ProjectileTypes.arrow,
 		player,
 		25.0,
 		target
 	)
 	player.get_parent().add_child(projectile)
-	player.state_machine.change_state(player.state_machine.current_state, "Idle")
+	player.state_machine.change_state(player.state_machine.current_state, EntityStates.idle)
 
 func _should_flip() -> bool:
 	return target.global_position.x < player.global_position.x

@@ -8,7 +8,7 @@ func _ready() -> void:
 	death_anim_done.connect(_on_death_anim_done)
 
 func enter(args = null) -> void:
-	enemy.animation_player.play("Die")
+	enemy.animation_player.play(EntityStates.death)
 	if enemy is Wolf:
 		var wolf = enemy as Wolf
 		wolf.whip_hitbox.disabled = true
@@ -21,7 +21,7 @@ func process(_delta: float) -> void:
 	pass
 
 func physics_process(_delta: float) -> void:
-	enemy.animation_player.play("Die")
+	enemy.animation_player.play(EntityStates.death)
 
 func _on_death_anim_done() -> void:
 	(get_tree().get_first_node_in_group(GroupNames.game) as Game).enemy_dead.emit()

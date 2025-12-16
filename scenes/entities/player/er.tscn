@@ -25,7 +25,6 @@ radius = 0.3
 render_priority = 0
 shader = ExtResource("2_224l6")
 shader_parameter/base_texture = ExtResource("3_x3p5h")
-shader_parameter/line_thickness = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6u4m0"]
 atlas = ExtResource("3_x3p5h")
@@ -192,7 +191,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_gam8m"]
-resource_name = "Walk"
+resource_name = "Walking"
 length = 0.66667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -224,7 +223,7 @@ _data = {
 &"Flinch": SubResource("Animation_513qc"),
 &"Idle": SubResource("Animation_85axf"),
 &"RESET": SubResource("Animation_465cw"),
-&"Walk": SubResource("Animation_gam8m")
+&"Walking": SubResource("Animation_gam8m")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_55u4e"]

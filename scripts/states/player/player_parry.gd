@@ -15,7 +15,7 @@ func enter(args = null) -> void:
 	
 	damager = args
 	player.is_successful_parry = true
-	player.animation_player.play("Parry")
+	player.animation_player.play(EntityStates.parry)
 	
 	if _should_flip_player():
 		player.scale.x *= -1
@@ -30,7 +30,7 @@ func process(_delta: float) -> void:
 	pass
 
 func physics_process(_delta: float) -> void:
-	player.animation_player.play("Parry")
+	player.animation_player.play(EntityStates.parry)
 
 func _should_flip_player() -> bool:
 	if damager == null: 
@@ -41,6 +41,6 @@ func _should_flip_player() -> bool:
 
 func _on_parry_done() -> void:
 	if Input.is_action_pressed("Weyland_Skill"):
-		player.state_machine.change_state(player.state_machine.current_state, "Skill")
+		player.state_machine.change_state(player.state_machine.current_state, EntityStates.skill)
 	else:
-		player.state_machine.change_state(player.state_machine.current_state, "Idle")
+		player.state_machine.change_state(player.state_machine.current_state, EntityStates.idle)

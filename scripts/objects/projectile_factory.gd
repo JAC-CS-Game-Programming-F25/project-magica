@@ -3,8 +3,8 @@ extends Node
 class_name ProjectileFactory
 
 static func create_instance(name: String, spawner: Entity, damage: float, target: Entity) -> Projectile:
-	match name.to_lower():
-		"dagger":
+	match name:
+		ProjectileTypes.dagger:
 			var projectile: Projectile = load("res://scenes/objects/er_dagger.tscn").instantiate()
 			var pos: Vector3 = spawner.collision_shape.global_position
 			projectile.position = Vector3(pos.x, pos.y + 0.25, pos.z)
@@ -16,7 +16,7 @@ static func create_instance(name: String, spawner: Entity, damage: float, target
 			spawner.active_projectile = projectile
 			return projectile
 		
-		"arrow":
+		ProjectileTypes.arrow:
 			var projectile: Projectile = load("res://scenes/objects/sal_arrow.tscn").instantiate()
 			var pos: Vector3 = spawner.collision_shape.global_position
 			projectile.position = Vector3(pos.x, pos.y + 0.25, pos.z)
@@ -28,7 +28,7 @@ static func create_instance(name: String, spawner: Entity, damage: float, target
 			spawner.active_projectile = projectile
 			return projectile
 		
-		"rose":
+		ProjectileTypes.rose:
 			var projectile: Projectile = load("res://scenes/objects/rose_dagger.tscn").instantiate()
 			var pos: Vector3 = spawner.collision_shape.global_position
 			projectile.position = Vector3(pos.x, pos.y + 0.5, pos.z)

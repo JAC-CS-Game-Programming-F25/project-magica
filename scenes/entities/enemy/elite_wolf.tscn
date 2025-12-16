@@ -23,7 +23,6 @@ radius = 0.3
 render_priority = 0
 shader = ExtResource("2_b0tpp")
 shader_parameter/base_texture = ExtResource("3_wpebe")
-shader_parameter/outline_size = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2gvb3"]
 atlas = ExtResource("3_wpebe")
@@ -211,7 +210,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_05v88"]
 resource_name = "Attack"
-length = 0.8666701
+length = 0.86667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -231,7 +230,7 @@ tracks/1/path = NodePath("AnimatedSprite3D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.13333337, 0.20138782, 0.26805452, 0.53333336, 0.5977144, 0.6666666, 0.73333335, 0.8),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.201388, 0.268055, 0.533333, 0.597714, 0.666667, 0.733333, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 3, 2, 1, 0, 7]
@@ -250,7 +249,7 @@ tracks/3/path = NodePath("WhipHitbox:monitoring")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.26666668, 0.53381425, 0.6666667, 0.8666667),
+"times": PackedFloat32Array(0, 0.2, 0.266667, 0.533814, 0.666667, 0.866667),
 "transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1),
 "update": 1,
 "values": [false, true, false, true, false, false]
@@ -262,46 +261,11 @@ tracks/4/path = NodePath("WhipHitbox/CollisionShape3D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.26666668, 0.53381425, 0.6666667, 0.8666667),
+"times": PackedFloat32Array(0, 0.2, 0.266667, 0.533814, 0.666667, 0.866667),
 "transitions": PackedFloat32Array(4.78871e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
 "update": 1,
 "values": [true, false, true, false, true, true]
 }
-
-[sub_resource type="Animation" id="Animation_dnync"]
-resource_name = "Die"
-length = 0.733337
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Die"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/2/type = "position_3d"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite3D")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.74, 0)
 
 [sub_resource type="Animation" id="Animation_aciup"]
 resource_name = "Idle"
@@ -431,10 +395,45 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.74, 0)
 
+[sub_resource type="Animation" id="Animation_dnync"]
+resource_name = "Death"
+length = 0.733337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Die"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.74, 0)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwinu"]
 _data = {
 &"Attack": SubResource("Animation_05v88"),
-&"Die": SubResource("Animation_dnync"),
+&"Death": SubResource("Animation_dnync"),
 &"Idle": SubResource("Animation_aciup"),
 &"RESET": SubResource("Animation_0mcmr"),
 &"Walk": SubResource("Animation_l322y")

@@ -18,7 +18,7 @@ func set_movement_target(movement_target: Vector3) -> void:
 	if !(current_state is PlayerIdleState or current_state is PlayerWalkingState):
 		return
 	
-	state_machine.change_state(state_machine.current_state, "walking", movement_target)
+	state_machine.change_state(state_machine.current_state, EntityStates.walk, movement_target)
 
 func take_damage(damage: float, _damager: Node3D = null) -> void:
 	super.take_damage(damage, _damager)
@@ -26,7 +26,7 @@ func take_damage(damage: float, _damager: Node3D = null) -> void:
 	time_since_damage = 0
 	internal_damage = health
 	health_bar.take_damage()
-	state_machine.change_state(state_machine.current_state, "Flinch")
+	state_machine.change_state(state_machine.current_state, EntityStates.flinch)
 
 func take_internal_damage(damage: float) -> void:
 	health -= damage

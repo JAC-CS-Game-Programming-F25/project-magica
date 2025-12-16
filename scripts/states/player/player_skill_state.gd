@@ -13,7 +13,7 @@ func exit() -> void:
 		player.is_guarding = false
 
 func process(_delta: float) -> void:
-	player.animation_player.play("Skill")
+	player.animation_player.play(EntityStates.skill)
 
 func physics_process(delta: float) -> void:
 	player.use_skill()

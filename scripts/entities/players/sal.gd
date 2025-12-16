@@ -32,8 +32,8 @@ func _physics_process(delta: float) -> void:
 		health = clamp(candidate_health, candidate_health, max_health)
 	
 	if timer > shooting_interval_frames:
-		if state_machine.current_state.name == "Idle" and target != null:
-			state_machine.change_state(state_machine.current_state, "Shoot", target)
+		if state_machine.current_state.name == EntityStates.idle and target != null:
+			state_machine.change_state(state_machine.current_state, EntityStates.shoot, target)
 	
 	timer += 1
 
@@ -49,7 +49,7 @@ func take_damage(damage: float, _damager: Node3D = null) -> void:
 	
 	internal_damage = health
 	health_bar.take_damage()
-	state_machine.change_state(state_machine.current_state, "Flinch")
+	state_machine.change_state(state_machine.current_state, EntityStates.flinch)
 
 
 func take_internal_damage(damage: float) -> void:
@@ -58,7 +58,7 @@ func take_internal_damage(damage: float) -> void:
 	health_bar.take_internal_damage()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Shoot":
+	if anim_name == EntityStates.shoot:
 		(state_machine.current_state as PlayerShootState).anim_done.emit()
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

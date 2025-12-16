@@ -44,12 +44,12 @@ func take_damage(damage: float, _damager: Node3D = null) -> void:
 	is_damaged = true
 	sprite.modulate = Color(1., 0.4, 0.4, 1.)
 	
-	if health <= 0 and state_machine.current_state.name != "Death":
-		state_machine.change_state(state_machine.current_state, "Death")
+	if health <= 0 and state_machine.current_state.name != EntityStates.death:
+		state_machine.change_state(state_machine.current_state, EntityStates.death)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Die":
+	if anim_name == EntityStates.death:
 		(state_machine.current_state as EnemyDeathState).death_anim_done.emit()
-	if anim_name == "Attack":
+	if anim_name == EntityStates.attack:
 		(state_machine.current_state as EnemyAttackingState).attack_anim_done.emit()

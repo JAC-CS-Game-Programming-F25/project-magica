@@ -16,18 +16,18 @@ var is_friendly: bool
 var target: Entity = null
 
 func _ready() -> void:
-	sprite.play("Appear")
+	sprite.play(ProjectileStates.appear)
 
 func _physics_process(delta: float) -> void:
-	if sprite.animation == "Idle" and previous_position == global_position:
+	if sprite.animation == ProjectileStates.idle and previous_position == global_position:
 		queue_free()
 	previous_position = global_position
 
 func _on_animated_sprite_3d_animation_finished() -> void:
-	if sprite.animation != "Appear":
+	if sprite.animation != ProjectileStates.appear:
 		return
 	
-	sprite.play("Idle")
+	sprite.play(ProjectileStates.idle)
 		
 	previous_position = global_position
 	target_position = target.collision_shape.global_position
@@ -43,7 +43,7 @@ func _on_animated_sprite_3d_animation_finished() -> void:
 	scale.x = -abs(scale.x) if _should_flip() else abs(scale.x)
 
 func _on_body_entered(body: Node3D) -> void:
-	if sprite.animation != "Idle":
+	if sprite.animation != ProjectileStates.idle:
 		return
 	
 	if body == origin:

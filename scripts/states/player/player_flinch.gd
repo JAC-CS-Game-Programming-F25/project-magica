@@ -18,7 +18,7 @@ func process(_delta: float) -> void:
 
 func physics_process(_delta: float) -> void:
 	if duration <= 0:
-		player.change_state("Idle")
+		player.change_state(EntityStates.idle)
 	
-	player.animation_player.play("Flinch")
+	player.animation_player.play(EntityStates.flinch)
 	duration -= 1

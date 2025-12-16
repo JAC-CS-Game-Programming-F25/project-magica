@@ -17,7 +17,7 @@ func _on_detection_sphere_body_entered(body: Node3D) -> void:
 	nearby_players.append(body)
 	target = body if target == null else target
 	
-	state_machine.change_state(state_machine.current_state, "Chase", body)
+	state_machine.change_state(state_machine.current_state, EntityStates.chase, body)
 
 func _on_detection_sphere_body_exited(body: Node3D) -> void:
 	if is_dead:
@@ -33,7 +33,7 @@ func _on_detection_sphere_body_exited(body: Node3D) -> void:
 	
 	if nearby_players.is_empty():
 		target = null
-		state_machine.change_state(state_machine.current_state, "Idle")
+		state_machine.change_state(state_machine.current_state, EntityStates.idle)
 		return
 	
 	var closest_player: Player = null
@@ -49,7 +49,7 @@ func _on_detection_sphere_body_exited(body: Node3D) -> void:
 			closest_player = nearby_players[i]
 			closest_distance = distance
 	
-	state_machine.change_state(state_machine.current_state, "Chase", closest_player)
+	state_machine.change_state(state_machine.current_state, EntityStates.chase, closest_player)
 
 func _get_distance(pos1: Vector3, pos2: Vector3) -> float:
 	return sqrt(

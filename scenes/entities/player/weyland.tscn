@@ -225,7 +225,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_olmmg"]
-resource_name = "Walk"
+resource_name = "Walking"
 length = 0.66667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -259,7 +259,7 @@ _data = {
 &"Parry": SubResource("Animation_h6cwe"),
 &"RESET": SubResource("Animation_f334i"),
 &"Skill": SubResource("Animation_in7yo"),
-&"Walk": SubResource("Animation_olmmg")
+&"Walking": SubResource("Animation_olmmg")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5h1"]
