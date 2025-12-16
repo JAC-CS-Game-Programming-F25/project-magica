@@ -15,6 +15,8 @@ class_name Entity
 var health: float
 var is_dead: bool = false
 
+var active_projectile: Projectile = null
+
 func take_damage(damage: float, _damager: Node3D = null) -> void:
 	health -= damage
 

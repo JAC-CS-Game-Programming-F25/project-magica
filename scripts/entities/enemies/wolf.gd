@@ -9,7 +9,6 @@ class_name Wolf
 
 var knife_interval: int = 60
 var timer = 0
-var active_projectile: Projectile
 
 var is_damaged: bool = false
 var time_since_damage: int = 0
@@ -32,7 +31,7 @@ func _on_whip_hitbox_body_entered(body: Node3D) -> void:
 	if body is not Player:
 		return
 	
-	(body as Player).take_damage(50.0, self)
+	(body as Player).take_damage(attack_damage, self)
 
 func take_damage(damage: float, _damager: Node3D = null) -> void:
 	if health <= 0:

@@ -6,10 +6,8 @@ class_name Sal
 @export var arrow_damage: float = 25.0
 @onready var bow_sfx: AudioStreamPlayer = $BowSFX
 
-var active_projectile: Projectile = null
 var timer: int = 0
 
-var target: Enemy
 var enemies_in_range: Array[Enemy]
 
 func _ready() -> void:
@@ -43,8 +41,8 @@ func take_damage(damage: float, _damager: Node3D = null) -> void:
 	super.take_damage(damage, _damager)
 	$HitSFX.play()
 	if health <= 0:
-		var game: Game = get_tree().get_first_node_in_group("Game") as Game
-		game.player_dead.emit()
+		var game: Game = get_tree().get_first_node_in_group(GroupNames.game) as Game
+		game.player_dead.emit(self)
 		get_parent().remove_child(self)
 		return
 	time_since_damage = 0

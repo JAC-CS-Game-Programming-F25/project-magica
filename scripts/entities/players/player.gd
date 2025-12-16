@@ -9,6 +9,8 @@ class_name Player
 var internal_damage: float
 var time_since_damage: float
 
+var target: Enemy = null
+
 signal game_status
 
 func set_movement_target(movement_target: Vector3) -> void:

@@ -3,6 +3,7 @@ extends Entity
 class_name Enemy
 
 @export var detection_sphere: Area3D
+@export var attack_damage: float
 
 var nearby_players: Array[Player] = []
 var target: Player = null
@@ -14,7 +15,7 @@ func _on_detection_sphere_body_entered(body: Node3D) -> void:
 	if body is not Player:
 		return
 	nearby_players.append(body)
-	target = body
+	target = body if target == null else target
 	
 	state_machine.change_state(state_machine.current_state, "Chase", body)
 

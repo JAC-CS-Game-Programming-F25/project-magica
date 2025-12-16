@@ -265,6 +265,7 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5h1"]
 render_priority = 0
 shader = ExtResource("2_ev6hy")
+shader_parameter/base_texture = ExtResource("3_aprn0")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkkpn"]
 atlas = ExtResource("3_aprn0")

@@ -27,6 +27,10 @@ func take_internal_damage() -> void:
 	var final_width: float = max_width * player.health / player.max_health
 	_tween_health(final_width)
 
+func heal() -> void:
+	var final_width: float = max_width * player.health / player.max_health
+	_tween_health(final_width)
+
 func _tween_health(width: float) -> void:
 	var tween: Tween = get_tree().create_tween()
 	var duration: float = player.flinch_duration_frames / 60.0

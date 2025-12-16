@@ -11,12 +11,22 @@ class_name Game
 @onready var level_music: AudioStreamPlayer = $LevelMusic
 
 var players_alive: int = 3
+var enemies_alive: int = 0
+var current_level: int = 1
 signal player_dead
+signal enemy_dead
 
 func _ready() -> void:
 	player_dead.connect(_on_player_dead)
+	enemy_dead.connect(_on_enemy_dead)
 	level_music.stop()
 	$CanvasLayer.hide()
+	
+	for c1 in get_children():
+		if c1 is Level:
+			for c2 in c1.get_children():
+				if c2 is Enemy:
+					enemies_alive += 1
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_clicked(event):
@@ -55,16 +65,43 @@ func _should_player_move(event: InputEvent, characterKey: String) -> bool:
 	return event is InputEvent \
 		and Input.is_action_pressed(characterKey) 
 
-func _on_player_dead() -> void:
+func _on_player_dead(player: Player) -> void:
 	players_alive -= 1
+	$Camera3D.untrack_player(player)
 	
 	if players_alive <= 0:
 		level_music.stop()
-		var state_machine = get_tree().get_first_node_in_group("GameState") as StateMachine
-		state_machine.change_state(state_machine.current_state, "MainMenu")
+		var state_machine = get_tree().get_first_node_in_group(GroupNames.game_state) as StateMachine
+		state_machine.change_state(state_machine.current_state, GameStates.main_menu)
 		
 		var new_game = load("res://scenes/game.tscn").instantiate()
 		add_sibling(new_game)
 		(get_parent() as GamePlayState).scene = new_game
 		get_parent().remove_child(self)
 		queue_free()
+
+func _on_enemy_dead() -> void:
+	enemies_alive -= 1
+	current_level += 1
+	
+	if enemies_alive <= 0:
+		level_music.stop()
+		var state_machine = get_tree().get_first_node_in_group(GroupNames.game_state) as StateMachine
+		state_machine.change_state(state_machine.current_state, GameStates.main_menu)
+		
+		var new_level_path = "res://scenes/level%s.tscn" % current_level
+		var new_level: Level = load(new_level_path).instantiate()
+		var new_game: Game = load("res://scenes/game.tscn").instantiate()
+		add_sibling(new_game)
+		(get_parent() as GamePlayState).scene = new_game
+		get_parent().remove_child(self)
+		
+		for c in new_game.get_children():
+			if c is Level:
+				new_game.remove_child(c)
+				break
+		new_game.add_child(new_level)
+		$Level.queue_free()
+		remove_child($Level)
+		queue_free()
+		

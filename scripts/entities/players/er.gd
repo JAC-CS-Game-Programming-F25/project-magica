@@ -5,10 +5,8 @@ class_name Er
 @export var knife_interval: int = 300
 @export var knife_damage: float = 25.0
 
-var active_projectile: Projectile = null
 var timer: int = 0
 
-var target: Enemy = null
 var enemies_in_range: Array[Enemy] = []
 
 func _ready() -> void:
@@ -35,15 +33,13 @@ func _physics_process(delta: float) -> void:
 	if timer > knife_interval and target != null:
 		$DaggerSFX.play()
 		timer = 0
-		var knife: Projectile = load('res://scenes/objects/er_dagger.tscn').instantiate()
-		var pos: Vector3 = (collision_shape as CollisionShape3D).global_position
-		knife.position = Vector3(pos.x, pos.y + 0.25, pos.z)
-		knife.origin = self
-		knife.is_friendly = true
-		knife.scale.x = knife.scale.x if scale.x > 0 else -scale.x
-		knife.damage = knife_damage
-		active_projectile = knife
-		get_parent().add_child(knife)
+		var projectile: Projectile = ProjectileFactory.create_instance(
+			"dagger",
+			self,
+			25.0,
+			target
+		)
+		get_parent().add_child(projectile)
 		return
 	
 	if active_projectile == null:
@@ -53,8 +49,8 @@ func take_damage(damage: float, _damager: Node3D = null) -> void:
 	super.take_damage(damage, _damager)
 	$HitSFX.play()
 	if health <= 0:
-		var game: Game = get_tree().get_first_node_in_group("Game") as Game
-		game.player_dead.emit()
+		var game: Game = get_tree().get_first_node_in_group(GroupNames.game) as Game
+		game.player_dead.emit(self)
 		get_parent().remove_child(self)
 		return
 	time_since_damage = 0

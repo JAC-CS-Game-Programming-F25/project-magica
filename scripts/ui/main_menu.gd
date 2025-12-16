@@ -8,7 +8,7 @@ func _on_quit_pressed() -> void:
 func _on_play_pressed() -> void:
 	$ButtonPressSound.play();
 	OS.delay_msec(1000)
-	var node := get_tree().get_first_node_in_group("GameState")
+	var node := get_tree().get_first_node_in_group(GroupNames.game_state)
 	
 	assert(
 		node is StateMachine, 
@@ -17,7 +17,7 @@ func _on_play_pressed() -> void:
 	
 	var state_machine: StateMachine = node as StateMachine
 	
-	state_machine.change_state(state_machine.current_state, "Play")
+	state_machine.change_state(state_machine.current_state, GameStates.play)
 
 func wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout

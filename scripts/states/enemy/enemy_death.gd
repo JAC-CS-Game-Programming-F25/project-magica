@@ -24,6 +24,7 @@ func physics_process(_delta: float) -> void:
 	enemy.animation_player.play("Die")
 
 func _on_death_anim_done() -> void:
+	(get_tree().get_first_node_in_group(GroupNames.game) as Game).enemy_dead.emit()
 	for child in enemy.get_parent().get_children():
 		if child == enemy:
 			enemy.get_parent().remove_child(enemy)

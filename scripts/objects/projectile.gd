@@ -13,6 +13,7 @@ var previous_position: Vector3
 var damage: float
 
 var is_friendly: bool
+var target: Entity = null
 
 func _ready() -> void:
 	sprite.play("Appear")
@@ -27,24 +28,19 @@ func _on_animated_sprite_3d_animation_finished() -> void:
 		return
 	
 	sprite.play("Idle")
-	var game: Game = get_tree().get_first_node_in_group("Game") as Game
+		
+	previous_position = global_position
+	target_position = target.collision_shape.global_position
+	var tween: Tween = get_tree().create_tween()
+	var distance: float = sqrt(
+		abs(target_position.x - global_position.x) +
+		abs(target_position.y - global_position.y) +
+		abs(target_position.z - global_position.z)
+	)
 	
-	for child: Node in game.get_children():
-		if !is_friendly and child is not Player or is_friendly and child is not Enemy:
-			continue
-		
-		previous_position = global_position
-		target_position = (child as Entity).collision_shape.global_position
-		var tween: Tween = get_tree().create_tween()
-		var distance: float = sqrt(
-			abs(target_position.x - global_position.x) +
-			abs(target_position.y - global_position.y) +
-			abs(target_position.z - global_position.z)
-		)
-		tween.tween_property(self, "global_position", target_position, distance / movement_speed)
-		
-		scale.x = -abs(scale.x) if _should_flip() else abs(scale.x)
-		return
+	tween.tween_property(self, "global_position", target_position, distance / movement_speed)
+	
+	scale.x = -abs(scale.x) if _should_flip() else abs(scale.x)
 
 func _on_body_entered(body: Node3D) -> void:
 	if sprite.animation != "Idle":

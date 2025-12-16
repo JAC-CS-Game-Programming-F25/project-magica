@@ -50,7 +50,7 @@ func take_damage(damage: float, damager: Node3D = null) -> void:
 	if parry_elapsed <= perfect_guard_frame_count and is_guarding:
 		$ParrySFX.play()
 		health = clamp(health + internal_damage - health, health + internal_damage - health, max_health)
-		internal_damage = 0
+		health_bar.heal()
 		state_machine.change_state(state_machine.current_state, "Parry", damager)
 		return
 	
@@ -60,8 +60,8 @@ func take_damage(damage: float, damager: Node3D = null) -> void:
 	if !is_guarding:
 		$HitSFX.play()
 		if health <= 0:
-			var game: Game = get_tree().get_first_node_in_group("Game") as Game
-			game.player_dead.emit()
+			var game: Game = get_tree().get_first_node_in_group(GroupNames.game) as Game
+			game.player_dead.emit(self)
 			get_parent().remove_child(self)
 			return
 		internal_damage = health
@@ -83,7 +83,6 @@ func use_skill() -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	print('entered')
 	if body is not Enemy or !is_successful_parry:
 		return
 	

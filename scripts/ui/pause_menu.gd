@@ -19,5 +19,5 @@ func _on_resume_pressed() -> void:
 func _on_quit_pressed() -> void:
 	resume()
 	
-	var state_machine: StateMachine = get_tree().get_first_node_in_group("GameState") as StateMachine
-	state_machine.change_state(state_machine.current_state, "MainMenu")
+	var state_machine: StateMachine = get_tree().get_first_node_in_group(GroupNames.game_state) as StateMachine
+	state_machine.change_state(state_machine.current_state, GameStates.main_menu)
