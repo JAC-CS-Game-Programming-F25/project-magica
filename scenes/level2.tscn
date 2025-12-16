@@ -1,13 +1,17 @@
-[gd_scene load_steps=22 format=3 uid="uid://c0nkmdy5wtkym"]
+[gd_scene load_steps=28 format=3 uid="uid://cobgettwkech0"]
 
-[ext_resource type="Texture2D" uid="uid://dghqviq33m73d" path="res://assets/textures/Tile.png" id="1_hrcei"]
-[ext_resource type="Texture2D" uid="uid://buij7043ebryy" path="res://assets/textures/Tile_normal.png" id="2_xa7n4"]
-[ext_resource type="Texture2D" uid="uid://bfq3p8oe3bdgw" path="res://assets/textures/Fence.png" id="3_bo4dx"]
-[ext_resource type="Texture2D" uid="uid://y4b0yivgp268" path="res://assets/textures/Roses0.png" id="4_76toy"]
-[ext_resource type="Texture2D" uid="uid://dpr6xthfrtnqh" path="res://assets/textures/Roses1.png" id="5_8g4ke"]
-[ext_resource type="Texture2D" uid="uid://vqwsogu8eodj" path="res://assets/textures/Roses2.png" id="6_56gwk"]
-[ext_resource type="Texture2D" uid="uid://pybhitcdggba" path="res://assets/sprites/RooftopBG.png" id="7_ve5ok"]
-[ext_resource type="PackedScene" uid="uid://cik0r83bs44wc" path="res://scenes/entities/enemy/elite_wolf.tscn" id="8_cleqw"]
+[ext_resource type="Script" uid="uid://bxgong0qer4m1" path="res://scripts/objects/level.gd" id="1_8g4ke"]
+[ext_resource type="Texture2D" uid="uid://dghqviq33m73d" path="res://assets/textures/Tile.png" id="2_56gwk"]
+[ext_resource type="Texture2D" uid="uid://buij7043ebryy" path="res://assets/textures/Tile_normal.png" id="3_ve5ok"]
+[ext_resource type="Texture2D" uid="uid://bfq3p8oe3bdgw" path="res://assets/textures/Fence.png" id="4_cleqw"]
+[ext_resource type="Texture2D" uid="uid://y4b0yivgp268" path="res://assets/textures/Roses0.png" id="5_wvb8j"]
+[ext_resource type="Texture2D" uid="uid://dpr6xthfrtnqh" path="res://assets/textures/Roses1.png" id="6_g8vcy"]
+[ext_resource type="Texture2D" uid="uid://vqwsogu8eodj" path="res://assets/textures/Roses2.png" id="7_cqal4"]
+[ext_resource type="Texture2D" uid="uid://pybhitcdggba" path="res://assets/sprites/RooftopBG.png" id="8_o3sye"]
+[ext_resource type="Shader" uid="uid://nr46wxtdqkp4" path="res://shaders/background.gdshader" id="9_24ks5"]
+[ext_resource type="Texture2D" uid="uid://03pk4i7iw6ju" path="res://assets/textures/background_noise.tres" id="10_s4es8"]
+[ext_resource type="Texture2D" uid="uid://byrie8xo2og5o" path="res://assets/textures/noise_distortion.tres" id="11_63e4f"]
+[ext_resource type="PackedScene" uid="uid://c3s1nic03mv45" path="res://scenes/entities/enemy/elite_wolf.tscn" id="12_8g4ke"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_f2txt"]
 vertices = PackedVector3Array(-24.5, 0.02, -2, -24.5, 0.02, 2, 24.5, 0.02, 2, 24.5, 0.02, -2)
@@ -15,10 +19,10 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 cell_height = 0.01
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b121j"]
-albedo_texture = ExtResource("1_hrcei")
+albedo_texture = ExtResource("2_56gwk")
 normal_enabled = true
 normal_scale = 3.0
-normal_texture = ExtResource("2_xa7n4")
+normal_texture = ExtResource("3_ve5ok")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
@@ -28,7 +32,7 @@ size = Vector2(1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2r41h"]
 transparency = 1
-albedo_texture = ExtResource("3_bo4dx")
+albedo_texture = ExtResource("4_cleqw")
 uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_offset = Vector3(0, 0.5, 0)
 uv1_triplanar = true
@@ -41,7 +45,7 @@ size = Vector2(1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ainy"]
 transparency = 1
-albedo_texture = ExtResource("4_76toy")
+albedo_texture = ExtResource("5_wvb8j")
 uv1_scale = Vector3(0.5, 1, 1)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -52,7 +56,7 @@ size = Vector2(1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6hdu"]
 transparency = 1
-albedo_texture = ExtResource("5_8g4ke")
+albedo_texture = ExtResource("6_g8vcy")
 uv1_scale = Vector3(0.5, 1, 1)
 uv1_offset = Vector3(0, 0.75, 0)
 uv1_triplanar = true
@@ -64,7 +68,7 @@ size = Vector2(1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_km5ld"]
 transparency = 1
-albedo_texture = ExtResource("6_56gwk")
+albedo_texture = ExtResource("7_cqal4")
 uv1_scale = Vector3(0.5, 1, 1)
 uv1_offset = Vector3(0, 0.65, 0)
 uv1_triplanar = true
@@ -76,7 +80,7 @@ size = Vector2(1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c41q"]
 transparency = 1
-albedo_texture = ExtResource("7_ve5ok")
+albedo_texture = ExtResource("8_o3sye")
 uv1_scale = Vector3(0.03, 0.03, 0)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -84,10 +88,22 @@ uv2_world_triplanar = true
 billboard_keep_scale = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_olg7q"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_8c41q")
 size = Vector2(1, 1)
 
-[node name="Level2" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iemx"]
+render_priority = 0
+shader = ExtResource("9_24ks5")
+shader_parameter/backgorund_tex = ExtResource("10_s4es8")
+shader_parameter/noise_tex = ExtResource("11_63e4f")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_64w2a"]
+material = SubResource("ShaderMaterial_8iemx")
+size = Vector2(1, 1)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_8g4ke")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 3.55271e-15, 0, -3.55271e-15, 1, 0, 0, 0)
@@ -118,5 +134,10 @@ mesh = SubResource("PlaneMesh_i2t4f")
 transform = Transform3D(75, 0, 0, 0, -2.18557e-07, -15, 0, 5, -6.55671e-07, 0, 1, -15)
 mesh = SubResource("PlaneMesh_olg7q")
 
-[node name="EliteWolf" parent="." instance=ExtResource("8_cleqw")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(75, 0, 0, 0, -2.18557e-07, -15, 0, 5, -6.55671e-07, 0, -1, -13.5)
+mesh = SubResource("PlaneMesh_64w2a")
+skeleton = NodePath("../City")
+
+[node name="EliteWolf" parent="." instance=ExtResource("12_8g4ke")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)

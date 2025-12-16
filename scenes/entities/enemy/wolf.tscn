@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bx3w7gquo41nu"]
+[gd_scene load_steps=45 format=3 uid="uid://bx6dh8iutymnp"]
 
 [ext_resource type="Shader" uid="uid://bl3li5nhgn1nw" path="res://shaders/entity_outline.gdshader" id="1_13wxg"]
 [ext_resource type="Script" uid="uid://c4b5rvgehjb7e" path="res://scripts/entities/enemies/wolf.gd" id="1_i1w6i"]

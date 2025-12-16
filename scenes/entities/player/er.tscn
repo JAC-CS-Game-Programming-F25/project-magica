@@ -25,6 +25,7 @@ radius = 0.3
 render_priority = 0
 shader = ExtResource("2_224l6")
 shader_parameter/base_texture = ExtResource("3_x3p5h")
+shader_parameter/line_thickness = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6u4m0"]
 atlas = ExtResource("3_x3p5h")
@@ -250,6 +251,7 @@ material = SubResource("StandardMaterial3D_cpy5q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 shape = SubResource("CylinderShape3D_mts7r")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
